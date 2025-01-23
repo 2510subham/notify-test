@@ -14,6 +14,10 @@ ENV TZ=Asia/Kolkata
 WORKDIR /app
 
 COPY --from=development /app/node_modules ./node_modules
-RUN rm -f /app/package.json
+COPY --from=development /app/package.json ./package.json
+COPY --from=development /app/index.js ./index.js
+COPY --from=development /app/firebaseConfig.json ./firebaseConfig.json
 
-CMD ["node", "index.js"]
+# RUN rm -f /app/package.json
+
+CMD ["node", "/app/index.js"]
